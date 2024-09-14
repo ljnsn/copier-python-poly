@@ -1,0 +1,191 @@
+# questions
+
+## metadata
+project_name:
+  type: str
+  help: An awesome project needs an awesome name. Tell me yours.
+  validator: >-
+    {% if not (project_name | regex_search('^[a-z][a-z0-9\-]+$')) %}
+    project_name must start with a letter, followed one or more letters, digits or dashes all lowercase.
+    {% endif %}
+
+project_snake:
+  type: str
+  help: Project name in snake_case.
+  # validator: >-
+  #   {% if not (project_name | regex_search('^[a-z][a-z0-9\_]+$')) %}
+  #   project_snake must start with a letter, followed one or more letters, digits or underscores all lowercase.
+  #   {% endif %}
+  default: "{% include pathjoin('includes', 'project-snake.jinja') %}"
+
+author_name:
+  type: str
+  help: Who's the author?
+  placeholder: nameuser
+  validator: >-
+    {% if author_name == '' %}
+    Must provide an author.
+    {% endif %}
+  placeholder: Your Name
+
+author_email:
+  type: str
+  help: What's the author's email?
+  placeholder: nameuser@company.com
+  validator: >-
+    {% if author_email == '' %}
+    Must provide an email.
+    {% endif %}
+  placeholder: your@name.com
+
+description:
+  type: str
+  help: Short project description.
+
+minimum_python_version:
+  type: str
+  help: Minimum Python version you want to support.
+  default: "3.12"
+
+maximum_python_version:
+  type: str
+  help: Maximum Python version you want to support.
+  default: ""
+
+license:
+  type: str
+  help: Project license
+
+## structure
+structure:
+  type: str
+  help: How do you want to structure your project?
+  choices:
+    polylith: poly
+    src: src
+    simple: simple
+
+## package manager
+package_manager:
+  type: str
+  help: Which package manager do you want to use?
+  choices:
+    uv: uv
+    pdm: pdm
+    poetry: poetry
+  default: uv
+
+## dev tools
+commitizen:
+  type: bool
+  help: Set up commitizen?
+  default: true
+
+cz_gitmoji:
+  type: bool
+  help: Set up cz gitmoji?
+  default: "{% if commitizen %}true{% else %}false{% endif %}"
+  when: "{{ commitizen }}"
+
+pytest:
+  type: bool
+  help: Set up pytest?
+  default: true
+
+coverage:
+  type: bool
+  help: Set up coverage?
+  default: "{% if pytest %}true{% else %}false{% endif %}"
+  when: "{{ pytest }}"
+
+ruff:
+  type: bool
+  help: Set up ruff?
+  default: true
+
+mypy:
+  type: bool
+  help: Set up mypy?
+  default: true
+
+pre_commit:
+  type: bool
+  help: Set up pre-commit?
+  default: true
+
+## other dependencies
+loguru:
+  type: bool
+  help: Add loguru?
+  default: true
+
+sqlalchemy:
+  type: bool
+  help: Add sqlalchemy?
+  default: false
+
+alembic:
+  type: bool
+  help: Set up alembic?
+  default: false
+  when: "{{ sqlalchemy }}"
+
+web_app:
+  type: bool
+  help: Writing a web app?
+  default: false
+
+web_app_lib:
+  type: str
+  help: Which library?
+  choices:
+    litestar: litestar
+    fastapi: fastapi
+  default: litestar
+  when: "{{ web_app }}"
+
+## CI
+ci:
+  type: bool
+  help: Do you want to set up a CI provider?
+  default: true
+
+ci_provider:
+  type: str
+  help: What Continuous Integration service do you want to use?
+  choices:
+    GitHub CI: github
+    GitLab CI: gitlab
+    Circle CI: circle
+  default: gitlab
+  when: "{{ ci }}"
+
+###############################################################################
+# settings
+_subdirectory: template
+
+_envops:
+  trim_blocks: true
+  lstrip_blocks: true
+
+_tasks:
+  - "git init"
+  # uv
+  - command: uv sync
+    when: "{{ package_manager == 'uv' }}"
+  - command: uv run inv poly.create-workspace {{ project_snake }}
+    when: "{{ package_manager == 'uv' and structure == 'poly' }}"
+  - command: uv run pre-commit install --install-hooks
+    when: "{{ pre_commit }}"
+
+  # pdm
+  - command: pdm install
+    when: "{{ package_manager == 'pdm' }}"
+  - command: pdm run inv poly.create-workspace {{ project_snake }}
+    when: "{{ package_manager == 'pdm' and structure == 'poly' }}"
+
+  # poetry
+  - command: poetry install
+    when: "{{ package_manager == 'poetry' }}"
+  - command: poetry poly create workspace --name {{ project_snake }} --theme loose
+    when: "{{ package_manager == 'poetry' and structure == 'poly' }}"

@@ -1,0 +1,9 @@
+{% if package_manager == 'uv' %}
+["hatchling"{% if structure == 'poly' %}, "hatch-polylith-bricks"{% endif %}]
+{% endif %}
+{% if package_manager == 'pdm' %}
+["pdm-backend"{% if structure == 'poly' %}, "pdm-polylith-workspace"{% endif %}]
+{% endif %}
+{% if package_manager == 'poetry' %}
+["poetry-core"]
+{% endif %}

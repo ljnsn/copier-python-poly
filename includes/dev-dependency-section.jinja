@@ -1,0 +1,19 @@
+{% if package_manager == 'poetry' %}
+[tool.poetry.dependencies]
+python = ">={{minimum_python_version}}{% if maximum_python_version %},<={{maximum_python_version}}{% endif %}"
+
+[tool.poetry.group.dev.dependencies]
+{% include pathjoin('includes', 'dev-dependencies.jinja') %}
+{% endif %}
+{% if package_manager == 'uv' -%}
+[tool.uv]
+dev-dependencies = [
+  {% include pathjoin('includes', 'dev-dependencies.jinja') %}
+]
+{% endif %}
+{% if package_manager == 'pdm' -%}
+[tool.pdm.dev-dependencies]
+dev = [
+  {% include pathjoin('includes', 'dev-dependencies.jinja') %}
+]
+{% endif %}

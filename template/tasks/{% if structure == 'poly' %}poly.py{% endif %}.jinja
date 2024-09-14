@@ -1,0 +1,20 @@
+"""Polylith related tasks."""
+
+{% if not loguru %}import logging{% endif %}
+from pathlib import Path
+
+from invoke import Context, task
+{% if loguru %}from loguru import logger{% endif %}
+
+{% if not loguru %}
+logger = logging.getLogger(__name__)
+{% endif %}
+
+
+@task
+def create_workspace(ctx: Context, name: str, theme: str = "loose") -> None:
+    """Create a new workspace."""
+    if Path("workspace.toml").exists():
+        logger.info("Workspace already exists")
+        return
+    ctx.run(f"poly create workspace --name {name} --theme {theme}")

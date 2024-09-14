@@ -1,0 +1,13 @@
+"""Invoke tasks."""
+
+from invoke.collection import Collection
+
+{% if structure == 'poly' %}
+from tasks import poly
+
+{% endif %}
+ns = Collection()
+
+{% if structure == 'poly' %}
+ns.add_collection(Collection.from_module(poly))
+{% endif %}

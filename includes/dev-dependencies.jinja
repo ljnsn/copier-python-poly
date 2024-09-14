@@ -1,0 +1,30 @@
+  {% if commitizen %}
+  "commitizen>=3.29.0",
+  {% endif %}
+  {% if coverage %}
+  "coverage>=7.6.1",
+  {% endif %}
+  {% if cz_gitmoji %}
+  "cz-conventional-gitmoji>=0.3.3",
+  {% endif %}
+  "invoke>=2.2.0",
+  "ipdb>=0.13.13",
+  "ipython>=7.16.1,!=8.18.0",
+  {% if mypy %}
+  "mypy>=0.1.8",
+  {% endif %}
+  {% if structure == 'poly' and package_manager != 'poetry' %}
+  "polylith-cli>=1.1.2",
+  {% endif %}
+  {% if pre_commit %}
+  "pre-commit>=3.8.0",
+  {% endif %}
+  {% if coverage %}
+  "pytest-cov>=5.0.0",
+  {% endif %}
+  {% if pytest %}
+  "pytest>=8.3.2",
+  {% endif %}
+  {% if ruff %}
+  "ruff>=0.2.2",
+  {% endif %}
