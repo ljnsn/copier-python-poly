@@ -20,6 +20,7 @@ repos:
       - id: check-executables-have-shebangs
       - id: check-json
       - id: check-merge-conflict
+        args: [--assume-in-merge]
       - id: check-shebang-scripts-are-executable
       - id: check-symlinks
       - id: check-toml
@@ -80,9 +81,18 @@ repos:
     pass_filenames: false
 {% endif %}
 
-{% if ruff %}
   - repo: local
     hooks:
+      # Prevent committing .rej files
+      - id: forbidden-files
+        name: forbidden files
+        entry:
+            found Copier update rejection files; review and remove them before
+            merging.
+        language: fail
+        files: "\\.rej$"
+
+{% if ruff %}
       - id: ruff
         name: Fix with ruff
         entry: ruff check
