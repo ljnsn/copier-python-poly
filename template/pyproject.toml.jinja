@@ -38,6 +38,7 @@ version_provider = "pep621"
 tag_format = "v$version"
 bump_message = {% if cz_gitmoji %}"🔖 bump(release): v$current_version → v$new_version"{% else %}"bump version: $current_version → $new_version"{% endif +%}
 update_changelog_on_bump = true
+annotated_tag = true
 {% if package_manager == 'uv' %}pre_bump_hooks = ["uv lock --upgrade-package cz-conventional-gitmoji"]{% endif %}
 {% endif %}
 
