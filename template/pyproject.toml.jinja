@@ -40,7 +40,7 @@ bump_message = {% if cz_gitmoji %}"🔖 bump(release): v$current_version → v$n
 update_changelog_on_bump = true
 annotated_tag = true
 allowed_prefixes = ["Squash", "Merge", "Revert"]
-{% if package_manager == 'uv' %}pre_bump_hooks = ["uv lock --upgrade-package cz-conventional-gitmoji"]{% endif %}
+{% if package_manager == 'uv' %}pre_bump_hooks = ["uv lock --upgrade-package {{project_name}}"]{% endif %}
 {% endif %}
 
 {% if ruff %}
