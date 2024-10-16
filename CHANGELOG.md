@@ -1,3 +1,19 @@
+## v0.0.2 (2024-10-16)
+
+### 🐛🚑️ Fixes
+
+- **commitizen**: set allowed prefixes
+- set annotated tag to true
+- add cz pre-bump hook if using uv
+
+### 🎨🏗️ Style & Architecture
+
+- formatting
+
+### 📝💡 Documentation
+
+- fix title in readme
+
 ## v0.0.1 (2024-10-09)
 
 ### config
