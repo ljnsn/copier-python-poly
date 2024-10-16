@@ -217,6 +217,12 @@ testpaths = ["tests"]
 {% endif %}
 
 {% if coverage %}
+[tool.coverage.run]
+branch = true
+command_line = "--module pytest"
+data_file = "reports/.coverage"
+source = [{% if structure == 'poly' %}"bases", "components"{% elif structure == 'src' %}"src"{% else %}"{{ package_snake }}"{% endif %}]
+
 [tool.coverage.report]
 fail_under = 50
 precision = 1
