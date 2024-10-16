@@ -106,3 +106,13 @@ repos:
         language: system
         types: [python]
 {% endif %}
+
+{% if mypy %}
+      - id: mypy
+        name: Validate types with mypy
+        entry: mypy
+        language: system
+        types: [python]
+        pass_filenames: false
+        files: \.py$
+{% endif %}
