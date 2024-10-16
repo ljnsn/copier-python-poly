@@ -1,3 +1,13 @@
+## v0.0.6 (2024-10-16)
+
+### 🐛🚑️ Fixes
+
+- bump gitmoji hook
+
+### 🔧🔨📦️ Configuration, Scripts, Packages
+
+- **pre-commit**: bump cz gitmoji
+
 ## v0.0.5 (2024-10-16)
 
 ### 🐛🚑️ Fixes
