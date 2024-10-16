@@ -149,16 +149,20 @@ unfixable = ["ERA001", "F401", "F841"]
     # private member accessed
     "SLF001",
 ]
+{% if web_app %}
 "**/endpoints/*" = [
     # do not perform function call in default arguments
     "B008",
     # too many arguments in function definition
     "PLR0913",
 ]
+{% endif %}
+{% if sqlalchemy %}
 "migrations/**/*.py" = [
     # part of implicit namespace package
     "INP001",
 ]
+{% endif %}
 {% if structure == 'poly' %}
 "development/**/*.py" = [
     # part of implicit namespace package
