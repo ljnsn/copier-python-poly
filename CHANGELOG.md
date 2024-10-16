@@ -1,3 +1,15 @@
+## v0.0.5 (2024-10-16)
+
+### 🐛🚑️ Fixes
+
+- add mypy config to pre-commit
+- make per-file-ignores dependent on packages
+- add ruff line length
+
+### 🧹 chore
+
+- remove comment
+
 ## v0.0.4 (2024-10-16)
 
 ### 🐛🚑️ Fixes
