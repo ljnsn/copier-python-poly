@@ -24,8 +24,8 @@ requires-python = ">={{minimum_python_version}}{% if maximum_python_version %},<
 {% endif %}
 {% if package_manager != 'poetry' %}
 dependencies = [
-  # add your dependencies here
-  {%+ if loguru %}"loguru>=0.7.2",{% endif +%}
+  {%+ if loguru %}"loguru>=0.7.2",{% endif %}
+  {%+ if sqlalchemy %}"sqlalchemy>=1.4.0",{% endif %}
 ]
 {% endif %}
 
