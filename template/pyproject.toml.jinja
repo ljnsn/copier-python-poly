@@ -43,16 +43,17 @@ allowed_prefixes = ["Squash", "Merge", "Revert"]
 {% if package_manager == 'uv' %}pre_bump_hooks = ["uv lock --upgrade-package {{project_name}}"]{% endif %}
 {% endif %}
 
-{% if ruff %}
+{%+ if ruff %}
 [tool.ruff]
 fix = true
 target-version = "py{{minimum_python_version|replace('.','')}}"
 line-length = 88
 {% if structure == 'poly' %}
 src = ["bases", "components", "test"]
-extend-exclude = ["development/*.py"]
 {% elif structure == 'src' %}
 src = ["src", "tests"]
+{% else %}
+src = ["{{package_snake}}", "tests"]
 {% endif %}
 
 [tool.ruff.format]
@@ -144,6 +145,8 @@ unfixable = ["ERA001", "F401", "F841"]
     "INP001",
     # usage of `assert` in tests
     "S101",
+    # suspicious non-cryptographic random usage
+    "S311",
     # magic value used in comarison
     "PLR2004",
     # private member accessed
