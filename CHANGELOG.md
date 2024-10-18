@@ -1,3 +1,14 @@
+## v0.0.7 (2024-10-18)
+
+### 🐛🚑️ Fixes
+
+- add sqlalchemy dep
+
+### 🔧🔨📦️ Configuration, Scripts, Packages
+
+- **pre-commit**: fix mypy hook
+- **ruff**: fix some rules
+
 ## v0.0.6 (2024-10-16)
 
 ### 🐛🚑️ Fixes
