@@ -1,3 +1,13 @@
+## v0.0.8 (2024-11-25)
+
+### 🐛🚑️ Fixes
+
+- add dependabot yml to template
+
+### 💚👷 CI & Build
+
+- add dependabot workflow
+
 ## v0.0.7 (2024-10-18)
 
 ### 🐛🚑️ Fixes
