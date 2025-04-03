@@ -1,3 +1,9 @@
+## v0.1.0 (2025-04-03)
+
+### ✨ Features
+
+- add forgejo ci provider
+
 ## v0.0.8 (2024-11-25)
 
 ### 🐛🚑️ Fixes
