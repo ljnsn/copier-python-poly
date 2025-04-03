@@ -157,7 +157,8 @@ ci_provider:
     GitHub CI: github
     GitLab CI: gitlab
     Circle CI: circle
-  default: gitlab
+    Forgejo Actions: forgejo
+  default: forgejo
   when: "{{ ci }}"
 
 ###############################################################################
